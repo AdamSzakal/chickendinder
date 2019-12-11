@@ -5,7 +5,6 @@ document.querySelector("body").style.backgroundColor =
 const canvas = document.querySelector("#draw");
 const context = canvas.getContext("2d");
 [canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
-context.scale(2, 2);
 
 const listOfCoordinates = [];
 const cellSize = 24; //px
@@ -15,19 +14,16 @@ const numOfLinesY = (canvas.height / cellSize) >> 0; // number of whole lines fi
 console.log("lines: " + numOfLinesX + " by " + numOfLinesY);
 console.log("h: " + canvas.height, "w: " + canvas.width);
 
-let coordinates = [],
-  x = 0,
-  y = 0;
+let coordinates = [];
 
 function getCoordinates() {
   for (let i = 0; i < numOfLinesY; i++) {
-    y = i * cellSize;
+    let y = i * cellSize;
     for (let j = 0; j < numOfLinesX; j++) {
-      x = j * cellSize;
-      coordinates.push({ x: x, y: y });
+      let x = j * cellSize;
+      coordinates.push({ x: x, y: y, x2: "", y2: "", angle: "" });
     }
   }
-  console.log(coordinates);
 }
 
 function drawLines(e) {
@@ -37,14 +33,18 @@ function drawLines(e) {
   context.lineWidth = 0.5;
 
   for (let i = 0; i < coordinates.length; i++) {
-    let dx = Math.abs(e.clientX - coordinates[i].x); // distance between pointer and item coordinate
-    let dy = Math.abs(e.clientY - coordinates[i].y);
-    let angle = Math.atan(dy / dx);
     context.moveTo(coordinates[i].x, coordinates[i].y);
-    context.lineTo(
-      coordinates[i].x + Math.cos(angle) * lineLength,
-      coordinates[i].y + Math.sin(angle) * lineLength
-    );
+    let dx = e.x - coordinates[i].x;
+    let dy = e.y - coordinates[i].y;
+    coordinates[i].angle = Math.atan2(dy, dx);
+    if (coordinates[i].angle < 0) {
+      coordinates[i].angle += 2 * Math.PI;
+    }
+    coordinates[i].x2 =
+      coordinates[i].x + Math.cos(coordinates[i].angle) * lineLength;
+    coordinates[i].y2 =
+      coordinates[i].y + Math.sin(coordinates[i].angle) * lineLength;
+    context.lineTo(coordinates[i].x2, coordinates[i].y2);
   }
   context.stroke();
 }
