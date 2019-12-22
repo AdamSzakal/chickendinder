@@ -1,36 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>🐓 💨</title>
-	</head>
-	<style>
-body {
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-	cursor: crosshair;
-	height: 100vh;
-	width: 100vh;
-	font-family: "Iosevka Term", monospace;
-	font-weight: light;
-}
-		p {
-			position: fixed;
-			top: 0;
-			left: 0;
-			height: 24px;
-			width: calc(5 * 24px);
-			margin: 0;
-			padding: 8px;
-			background: inherit;
-			font-size: 12px;
-			opacity: .8;
-		}
-	</style>
-	<body>
-		<p>chickendinder v1.0</p>
-		<canvas id="draw"></canvas>
-		<script src="script.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>🐓 💨</title>
+  </head>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      cursor: crosshair;
+      height: 100vh;
+      width: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
+        helvetica, 'helvetica neue', ubuntu, roboto, noto, 'segoe ui', arial,
+        sans-serif;
+      font-weight: light;
+    }
+    p {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 24px;
+      width: calc(5 * 24px);
+      margin: 0;
+      padding: 8px;
+      background: inherit;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    canvas {
+      mix-blend-mode: overlay;
+    }
+
+    header {
+      position: absolute;
+      background: white;
+      margin: 16px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      margin: 0;
+      font-size: 16px;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>chickendinder v1.0</h1>
+    </header>
+    <canvas id="draw"></canvas>
+    <script src="script.js"></script>
+  </body>
 </html>
